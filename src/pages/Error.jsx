@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <article>
+    <section>
       <img
         src="https://i.imgur.com/00h26Sj_d.webp?maxwidth=520&shape=thumb&fidelity=high"
         alt="Not that road"
@@ -12,7 +12,7 @@ const Error = () => {
       <Link to="/" className="link">
         Home
       </Link>
-    </article>
+    </section>
   );
 };
 

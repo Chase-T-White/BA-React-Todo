@@ -8,7 +8,32 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  font-family: "Kombat";
 }
+
+:root {
+  /* bg colors */
+  --dark-brown: #2f0000;
+  --orange: #ef5f10;
+  --burnt-orange: #891000;
+  --brown: #4f1000;
+
+  /* text colors */
+  --text-yellow: #f7f003;
+  --text-gold: #f09b32;
+
+  --text-shadow: #0a0202;
+
+  /* other colors */
+  --select-green: #009904;
+
+  /* text shadows */
+
+  --shadow-lg: 6px 6px 0 var(--text-shadow);
+  --shadow-sm: 2px 2px 0 var(--text-shadow);
+}
+
+/* General */
 
 html {
   height: 100vh;
@@ -19,7 +44,6 @@ html {
 body {
   height: inherit;
   width: inherit;
-  font-family: "Kombat";
 }
 
 ul,
@@ -32,11 +56,97 @@ li {
   width: inherit;
 }
 
+h2 {
+  font-size: 4.5rem;
+  color: var(--text-yellow);
+  text-shadow: var(--shadow-lg);
+}
+
+.bordered {
+  padding: 0.25rem;
+  color: var(--text-yellow);
+  text-shadow: var(--shadow-sm);
+  background-color: #484d5d;
+  border: 2px inset #88929f;
+}
+
+.icon {
+  font-size: 1.75rem;
+}
+
+/* Buttons */
+
+.btn {
+  position: relative;
+  color: var(--text-yellow);
+  text-shadow: var(--shadow-sm);
+  background-color: #484d5d;
+  padding: 0.25rem 1.5rem;
+  border: 2px inset #88929f;
+}
+
+.btn:focus-within {
+  outline: none;
+}
+
+.btn:hover,
+.btn:focus {
+  border-style: solid;
+  border-color: var(--select-green);
+  outline: 1px solid var(--select-green);
+  cursor: pointer;
+}
+
+.disabled:hover,
+.disabled:focus {
+  border: 2px inset #88929f;
+  outline: none;
+}
+
+.disabled:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #ffffff56;
+}
+
+/* Main content */
+
 main {
   height: inherit;
   width: inherit;
+  padding: 5rem;
   background-image: url("/public/images/mortalkombatii_portal.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+article {
+  position: relative;
+  max-width: 1200px;
+  height: 100%;
+  margin-inline: auto;
+  padding: 1.5rem;
+}
+
+article::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background-image: linear-gradient(#ffffff34, #ffffff34),
+    url("/public/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+article > * {
+  position: relative;
+  z-index: 50;
 }

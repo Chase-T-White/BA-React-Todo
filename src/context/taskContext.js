@@ -27,7 +27,12 @@ const TasksProvider = ({ children }) => {
     setTasksList([...tasksList, newTask]);
   };
 
-  const updatedTask = (id) => {};
+  const updatedTask = (editedTask) => {
+    const updatedTaskList = tasksList.map((task) =>
+      task.id === editedTask.id ? editedTask : task
+    );
+    setTasksList(updatedTaskList);
+  };
 
   const deleteSingleTask = (id) => {
     const newTaskList = tasksList.filter((task) => task.id !== id);

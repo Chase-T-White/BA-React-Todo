@@ -1,13 +1,42 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "Kombat";
+  src: local("mortalkombat2"),
+    url("./fonts/mortalkombat2.ttf") format("truetype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+body {
+  height: inherit;
+  width: inherit;
+  font-family: "Kombat";
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+#root {
+  height: inherit;
+  width: inherit;
+}
+
+main {
+  height: inherit;
+  width: inherit;
+  background-image: url("/public/images/mortalkombatii_portal.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

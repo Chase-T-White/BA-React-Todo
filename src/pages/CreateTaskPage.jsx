@@ -1,9 +1,9 @@
-import TaskForm from "../components/TaskForm";
+import TaskForm from "../components/taskform/TaskForm";
 
 const CreateTaskPage = () => {
   return (
     <article>
-      <TaskForm />
+      <TaskForm edit={false} />
     </article>
   );
 };

@@ -9,6 +9,8 @@
   padding: 0;
   box-sizing: inherit;
   font-family: "Kombat";
+  color: var(--text-yellow);
+  text-shadow: var(--shadow-sm);
 }
 
 :root {
@@ -56,16 +58,23 @@ li {
   width: inherit;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  text-shadow: var(--shadow-lg);
+}
+
 h2 {
   font-size: 4.5rem;
-  color: var(--text-yellow);
-  text-shadow: var(--shadow-lg);
+}
+
+h3 {
+  font-size: 2.8rem;
 }
 
 .bordered {
   padding: 0.25rem;
-  color: var(--text-yellow);
-  text-shadow: var(--shadow-sm);
   background-color: #484d5d;
   border: 2px inset #88929f;
 }
@@ -78,8 +87,7 @@ h2 {
 
 .btn {
   position: relative;
-  color: var(--text-yellow);
-  text-shadow: var(--shadow-sm);
+  font-size: 1.25rem;
   background-color: #484d5d;
   padding: 0.25rem 1.5rem;
   border: 2px inset #88929f;
@@ -113,6 +121,7 @@ h2 {
 /* Main content */
 
 main {
+  position: relative;
   height: inherit;
   width: inherit;
   padding: 5rem;

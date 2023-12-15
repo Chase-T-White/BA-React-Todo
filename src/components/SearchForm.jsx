@@ -63,7 +63,6 @@ const Form = styled.form`
   input {
     flex-grow: 1;
     font-size: 1rem;
-    color: var(--text-yellow);
     background-color: transparent;
     border: none;
 

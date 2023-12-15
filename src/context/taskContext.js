@@ -7,6 +7,9 @@ const TasksContext = React.createContext();
 const TasksProvider = ({ children }) => {
   const [tasksList, setTasksList] = useState([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [isYes, setIsYes] = useState(false);
 
   useEffect(() => {
     checkStorage(setTasksList);
@@ -51,6 +54,12 @@ const TasksProvider = ({ children }) => {
         updatedTask,
         deleteSingleTask,
         deleteTasks,
+        isShowModal,
+        setIsShowModal,
+        modalMessage,
+        setModalMessage,
+        isYes,
+        setIsYes,
       }}
     >
       {children}

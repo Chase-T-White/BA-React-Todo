@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, TaskPage, EditTaskPage, CreateTaskPage, Error } from "./pages";
+import MessageModal from "./components/MessageModal";
 import "./index.css";
 import "./fonts/mortalkombat2.ttf";
 
 function App() {
   return (
     <main>
+      <MessageModal />
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />

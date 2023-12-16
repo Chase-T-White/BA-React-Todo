@@ -33,6 +33,10 @@
 
   --shadow-lg: 6px 6px 0 var(--text-shadow);
   --shadow-sm: 2px 2px 0 var(--text-shadow);
+
+  --background-shade: #323541;
+  --background: #484d5d;
+  --background-tint: #666d83;
 }
 
 /* General */
@@ -75,7 +79,7 @@ h3 {
 
 .bordered {
   padding: 0.25rem;
-  background-color: #484d5d;
+  background-color: var(--background);
   border: 2px inset #88929f;
 }
 
@@ -88,7 +92,7 @@ h3 {
 .btn {
   position: relative;
   font-size: 1.25rem;
-  background-color: #484d5d;
+  background-color: var(--background);
   padding: 0.25rem 1.5rem;
   border: 2px inset #88929f;
 }

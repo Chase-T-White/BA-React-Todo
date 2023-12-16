@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowRoundBack, IoMdClose, IoIosAdd } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import SubTaskFormSection from "./SubTaskFormSection";
+import TagsFormSection from "./TagsFormSection";
 
 const TaskForm = ({ edit }) => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const TaskForm = ({ edit }) => {
             name="name"
             id="name"
             placeholder="Task..."
+            required
           />
         </div>
         <div className="split-container">
@@ -68,21 +70,7 @@ const TaskForm = ({ edit }) => {
           </div>
         </div>
         <SubTaskFormSection subTasks={subTasks} setSubTasks={setSubTasks} />
-        <div>
-          <label htmlFor="tags">Add Tag</label>
-          <div>
-            <input
-              className="bordered"
-              type="text"
-              name="tags"
-              id="tags"
-              placeholder="Add Tag..."
-            />
-            <div>
-              <IoIosAdd />
-            </div>
-          </div>
-        </div>
+        <TagsFormSection tags={tags} setTags={setTags} />
         <button className="btn">{edit ? "Update Task" : "Add Task"}</button>
       </section>
     </Form>

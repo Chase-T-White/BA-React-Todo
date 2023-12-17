@@ -1,15 +1,28 @@
-import React from "react";
 import { IoMdClose } from "react-icons/io";
+import styled from "styled-components";
 
 const Tag = ({ id, tag, removeTag }) => {
   return (
-    <li>
+    <ListItem className="bordered bordered__noPoint">
       <h6>{tag}</h6>
-      <div onClick={() => removeTag(id)}>
+      <div onClick={() => removeTag(id)} title="Remove">
         <IoMdClose />
       </div>
-    </li>
+    </ListItem>
   );
 };
 
 export default Tag;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--background-shade);
+
+  div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+`;

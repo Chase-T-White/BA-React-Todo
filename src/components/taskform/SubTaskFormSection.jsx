@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import { uid } from "uid";
+import styled from "styled-components";
 import SubTask from "./SubTask";
 
 const SubTaskFormSection = ({ subTasks, setSubTasks }) => {
@@ -45,9 +46,8 @@ const SubTaskFormSection = ({ subTasks, setSubTasks }) => {
           })}
         </ol>
       )}
-      <div>
+      <Container className="bordered">
         <input
-          className="bordered"
           type="text"
           name="subTask"
           id="subTask"
@@ -55,13 +55,40 @@ const SubTaskFormSection = ({ subTasks, setSubTasks }) => {
           value={input}
           onKeyDown={handleKeyDown}
           onChange={(e) => setInput(e.target.value)}
+          min={1}
+          max={50}
         />
         <div onClick={addToSubtasksList}>
           <IoIosAdd />
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
 
 export default SubTaskFormSection;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+
+  input {
+    background-color: transparent;
+    border: none;
+  }
+
+  div {
+    display: flex;
+    align-content: center;
+    background-color: var(--background-shade);
+    border: 2px inset #88929f;
+
+    &:hover {
+      cursor: pointer;
+      border-style: solid;
+      border-color: var(--select-green);
+      outline: 1px solid var(--select-green);
+    }
+  }
+`;

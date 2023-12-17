@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IoIosAdd } from "react-icons/io";
 import { uid } from "uid";
+import styled from "styled-components";
 import Tag from "./Tag";
 
 const TagsFormSection = ({ tags, setTags }) => {
@@ -8,9 +9,12 @@ const TagsFormSection = ({ tags, setTags }) => {
   const [isDuplicate, setIsDuplicate] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsDuplicate(false);
+      setInput("");
     }, 3000);
+
+    return () => clearTimeout(timer);
   }, [isDuplicate]);
 
   const addToTagsList = () => {
@@ -42,33 +46,73 @@ const TagsFormSection = ({ tags, setTags }) => {
   return (
     <div>
       <label htmlFor="tags">Add Tag</label>
-      <div>
-        <div>
-          <input
-            className="bordered"
-            type="text"
-            name="tags"
-            id="tags"
-            placeholder="Add Tag..."
-            onKeyDown={handleKeyDown}
-            onChange={(e) => setInput(e.target.value)}
-            value={input}
-          />
-          <div onClick={addToTagsList}>
-            <IoIosAdd />
-          </div>
+      <Container className="bordered">
+        <input
+          type="text"
+          name="tags"
+          id="tags"
+          placeholder="Add Tag..."
+          onKeyDown={handleKeyDown}
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          min={1}
+          max={50}
+        />
+        <div onClick={addToTagsList}>
+          <IoIosAdd />
         </div>
         {isDuplicate && <p>Tag Already Exists</p>}
-      </div>
+      </Container>
       {tags.length > 0 && (
-        <ul>
+        <List>
           {tags.map((tag) => {
             return <Tag key={tag.id} {...tag} removeTag={removeTag} />;
           })}
-        </ul>
+        </List>
       )}
     </div>
   );
 };
 
 export default TagsFormSection;
+
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+
+  input {
+    background-color: transparent;
+    border: none;
+  }
+
+  div {
+    display: flex;
+    align-content: center;
+    background-color: var(--background-shade);
+    border: 2px inset #88929f;
+
+    &:hover {
+      cursor: pointer;
+      border-style: solid;
+      border-color: var(--select-green);
+      outline: 1px solid var(--select-green);
+    }
+  }
+
+  p {
+    position: absolute;
+    top: -50%;
+    right: 0%;
+    font-size: 0.75rem;
+    color: red;
+  }
+`;
+
+const List = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+`;

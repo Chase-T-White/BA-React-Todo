@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 
 const SubTask = ({ task, id, removeSubTask }) => {
   return (
-    <Item className="bordered">
+    <Item>
       <p>{task}</p>
       <div onClick={() => removeSubTask(id)}>
         <IoMdClose />
@@ -18,6 +18,8 @@ export default SubTask;
 const Item = styled.li`
   display: flex;
   max-width: 300px;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
   background-color: var(--background-tint);
 
   p {

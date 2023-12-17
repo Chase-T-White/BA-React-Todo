@@ -35,6 +35,8 @@ const TaskForm = ({ edit }) => {
       prioriy,
       dueBy: { dueDate, time },
       createdAt,
+      subTasks,
+      tags,
     };
     createTask(newTaskData);
     navigate("/");

@@ -12,6 +12,7 @@ const TasksProvider = ({ children }) => {
   const [isYes, setIsYes] = useState(false);
 
   useEffect(() => {
+    // updateStorage([]);
     checkStorage(setTasksList);
   }, []);
 
@@ -39,7 +40,7 @@ const TasksProvider = ({ children }) => {
 
   const deleteSingleTask = (id) => {
     const newTaskList = tasksList.filter((task) => task.id !== id);
-    setTasksList([newTaskList]);
+    setTasksList(newTaskList);
   };
 
   const deleteTasks = () => {

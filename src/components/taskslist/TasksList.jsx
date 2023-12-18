@@ -28,11 +28,14 @@ const TasksList = () => {
 export default TasksList;
 
 const Wrapper = styled.div`
-  max-width: 900px;
-  height: 475px;
+  max-width: 1100px;
+  height: 450px;
   margin-inline: auto;
+  padding: 0.5rem;
   overflow-y: scroll;
   scrollbar-width: none;
+  background-color: var(--background-shade2);
+  border: 4px inset #323541;
 
   ul {
     display: flex;

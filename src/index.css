@@ -34,6 +34,7 @@
   --shadow-lg: 6px 6px 0 var(--text-shadow);
   --shadow-sm: 2px 2px 0 var(--text-shadow);
 
+  --background-shade2: #18191f;
   --background-shade: #323541;
   --background: #484d5d;
   --background-tint: #666d83;

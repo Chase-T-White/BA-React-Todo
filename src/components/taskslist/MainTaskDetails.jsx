@@ -23,7 +23,7 @@ const MainTaskDetails = ({ task, dueBy, createdAt, priority, complexity }) => {
         <h6>{task}</h6>
         {headsUpMessage && <small>{headsUpMessage}</small>}
       </header>
-      <div>
+      <div className="details-container">
         {dueBy && (
           <div className="container">
             <CiCalendarDate />
@@ -75,15 +75,29 @@ const Wrapper = styled.div`
   header {
     display: flex;
     justify-content: space-between;
+    padding: 0.25rem 1rem;
+    background-color: var(--background);
+    border: 2px inset #88929f;
 
     small {
       align-self: flex-end;
     }
   }
 
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
   .container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  span {
+    color: #eee;
   }
 `;

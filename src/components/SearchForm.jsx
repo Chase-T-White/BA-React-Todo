@@ -78,7 +78,7 @@ const Form = styled.form`
   }
 
   select {
-    flex-grow: 1;
+    flex-basis: 50%;
     cursor: pointer;
 
     &:hover,

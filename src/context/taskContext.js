@@ -41,9 +41,24 @@ const TasksProvider = ({ children }) => {
   };
 
   const toggleCompleted = (id, subTask = null) => {
-    const updatedTasksList = tasksList.map((task) =>
-      task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-    );
+    let updatedTasksList;
+    if (subTask) {
+      let taskToEdit = tasksList.find((task) => task.id === id);
+      const updateSubTasks = taskToEdit.subTasks.map((originalSubTask) =>
+        originalSubTask.id === subTask.id
+          ? { ...originalSubTask, isCompleted: !originalSubTask.isCompleted }
+          : originalSubTask
+      );
+      taskToEdit = { ...taskToEdit, subTasks: updateSubTasks };
+      updatedTasksList = tasksList.map((task) =>
+        task.id === id ? { ...taskToEdit } : task
+      );
+    } else {
+      updatedTasksList = tasksList.map((task) =>
+        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+      );
+    }
+
     setTasksList(updatedTasksList);
   };
 

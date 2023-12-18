@@ -46,7 +46,7 @@ const Wrapper = styled.div`
     gap: 1.5rem;
 
     button {
-      flex-grow: 1;
+      flex-basis: 50%;
     }
   }
 `;

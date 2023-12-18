@@ -1,10 +1,9 @@
-import { CiCalendarDate, CiEdit, CiTrash } from "react-icons/ci";
-import { IoIosArrowRoundUp, IoMdCheckmark } from "react-icons/io";
-import { BsArrowsMove } from "react-icons/bs";
+import { CiEdit, CiTrash } from "react-icons/ci";
+import { IoMdCheckmark } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import MainTaskDetails from "./MainTaskDetails";
 import { useTasksContext } from "../../context/taskContext";
-// import healthBarTimer from "../../functions/healthBarTimer";
 
 const Task = ({
   id,
@@ -18,39 +17,18 @@ const Task = ({
   isCompleted,
 }) => {
   const navigate = useNavigate();
-  const { deleteSingleTask } = useTasksContext();
-  // const [healthBarRemaining, headsUpMessage] = healthBarTimer(
-  //   dueBy.dueDate,
-  //   createdAt
-  // );
+  const { toggleCompleted, deleteSingleTask } = useTasksContext();
+
   return (
     <ListItem>
-      <header
-      // style={{
-      //   backgroundImage: `linear-gradient(to right, green 0 ${healthBarRemaining}%, red ${healthBarRemaining}% 100%)`,
-      // }}
-      >
-        <h6>{task}</h6>
-      </header>
+      <MainTaskDetails
+        task={task}
+        dueBy={dueBy}
+        createdAt={createdAt}
+        priority={priority}
+        complexity={complexity}
+      />
       <div>
-        <div className="container">
-          <CiCalendarDate />
-          <p>
-            Due Date: <span>actual date and time</span>
-          </p>
-        </div>
-        <div className="container">
-          <IoIosArrowRoundUp />
-          <p>
-            Priority: <span>values here</span>
-          </p>
-        </div>
-        <div className="container">
-          <BsArrowsMove />
-          <p>
-            Complexity: <span>values here</span>
-          </p>
-        </div>
         <ul>
           {tags.map((tag) => {
             return <li key={tag.id}>{tag.tag}</li>;
@@ -58,7 +36,7 @@ const Task = ({
         </ul>
         <div className="container">
           <div className="container">
-            <div>
+            <div onClick={() => toggleCompleted(id)}>
               <IoMdCheckmark />
             </div>
             <div onClick={() => navigate(`editTask/${id}`)}>
@@ -78,6 +56,8 @@ const Task = ({
 export default Task;
 
 const ListItem = styled.li`
+  max-width: 350px;
+
   header {
     margin-bottom: 1rem;
   }

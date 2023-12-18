@@ -7,7 +7,7 @@ import { useTasksContext } from "../context/taskContext";
 
 const Home = () => {
   const navigate = useNavigate();
-  const deleteTasks = useTasksContext();
+  const { tasksList, deleteTasks } = useTasksContext();
   return (
     <article>
       <Wrapper>
@@ -21,7 +21,7 @@ const Home = () => {
             Delete All Tasks
           </button>
         </div>
-        <TasksList />
+        {tasksList.length > 0 && <TasksList />}
       </Wrapper>
     </article>
   );
@@ -30,6 +30,8 @@ const Home = () => {
 export default Home;
 
 const Wrapper = styled.div`
+  height: 100%;
+
   h2 {
     text-align: center;
     margin-bottom: 2rem;
@@ -38,6 +40,7 @@ const Wrapper = styled.div`
   .button-container {
     max-width: 400px;
     margin-inline: auto;
+    margin-bottom: 2rem;
 
     display: flex;
     gap: 1.5rem;

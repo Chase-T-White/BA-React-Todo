@@ -38,6 +38,13 @@ const TasksProvider = ({ children }) => {
     setTasksList(updatedTaskList);
   };
 
+  const toggleCompleted = (id, subTask = null) => {
+    const updatedTasksList = tasksList.map((task) =>
+      task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+    );
+    setTasksList(updatedTasksList);
+  };
+
   const deleteSingleTask = (id) => {
     const newTaskList = tasksList.filter((task) => task.id !== id);
     setTasksList(newTaskList);
@@ -53,6 +60,7 @@ const TasksProvider = ({ children }) => {
         tasksList,
         createTask,
         updatedTask,
+        toggleCompleted,
         deleteSingleTask,
         deleteTasks,
         isShowModal,

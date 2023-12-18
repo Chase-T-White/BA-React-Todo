@@ -23,16 +23,17 @@ const TaskForm = ({ edit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target);
     const name = e.target[0].value;
     const complexity = e.target[1].value;
-    const prioriy = e.target[2].value;
+    const priority = e.target[2].value;
     const dueDate = e.target[3].value;
     const time = e.target[4].value;
     const createdAt = getDate();
     const newTaskData = {
       task: name,
       complexity,
-      prioriy,
+      priority,
       dueBy: { dueDate, time },
       createdAt,
       subTasks,

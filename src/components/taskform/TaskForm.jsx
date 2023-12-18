@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import SubTaskFormSection from "./SubTaskFormSection";
 import TagsFormSection from "./TagsFormSection";
 import { useTasksContext } from "../../context/taskContext";
 
 const TaskForm = ({ edit }) => {
-  const { createTask, updatedTask } = useTasksContext();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { tasksList, createTask, updatedTask } = useTasksContext();
+  const [task, setTask] = useState("");
+  const [complexity, setComplexity] = useState("");
+  const [priority, setPriority] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [time, setTime] = useState("");
   const [subTasks, setSubTasks] = useState([]);
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    if (edit) {
+      const editTask = tasksList.find((task) => task.id === id);
+      if (editTask) {
+        setTask(editTask.task);
+        setComplexity(editTask.complexity);
+        setPriority(editTask.priority);
+        setDueDate(editTask.dueBy.dueDate);
+        setTime(editTask.dueBy.time);
+        setSubTasks(editTask.subTasks);
+        setTags(editTask.tags);
+      }
+    }
+  }, [edit, id, tasksList]);
 
   const getDate = () => {
     const date = new Date();
@@ -23,23 +44,20 @@ const TaskForm = ({ edit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    const name = e.target[0].value;
-    const complexity = e.target[1].value;
-    const priority = e.target[2].value;
-    const dueDate = e.target[3].value;
-    const time = e.target[4].value;
-    const createdAt = getDate();
-    const newTaskData = {
-      task: name,
+    const taskData = {
+      task,
       complexity,
       priority,
       dueBy: { dueDate, time },
-      createdAt,
+      createdAt: getDate(),
       subTasks,
       tags,
     };
-    createTask(newTaskData);
+    if (edit) {
+      updatedTask({ ...taskData, id });
+    } else {
+      createTask(taskData);
+    }
     navigate("/");
   };
 
@@ -67,6 +85,8 @@ const TaskForm = ({ edit }) => {
             minLength={3}
             maxLength={50}
             required
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
           />
         </div>
         <div className="split-container">
@@ -80,6 +100,8 @@ const TaskForm = ({ edit }) => {
                 id="complexity"
                 min={1}
                 max={10}
+                value={complexity}
+                onChange={(e) => setComplexity(e.target.value)}
               />
             </div>
           </div>
@@ -93,6 +115,8 @@ const TaskForm = ({ edit }) => {
                 id="priority"
                 min={1}
                 max={10}
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
               />
             </div>
           </div>
@@ -106,11 +130,20 @@ const TaskForm = ({ edit }) => {
               name="dueDate"
               id="dueDate"
               min={getDate()}
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
             />
           </div>
           <div className="wrapper">
             <label htmlFor="time">Select Time</label>
-            <input className="bordered" type="time" name="time" id="time" />
+            <input
+              className="bordered"
+              type="time"
+              name="time"
+              id="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
           </div>
         </div>
         <SubTaskFormSection subTasks={subTasks} setSubTasks={setSubTasks} />

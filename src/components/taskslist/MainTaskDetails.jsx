@@ -54,9 +54,9 @@ const MainTaskDetails = ({ task, dueBy, createdAt, priority, complexity }) => {
             <p>
               Complexity:{" "}
               <span>
-                {Number(priority) < 4
+                {Number(complexity) < 4
                   ? "Low"
-                  : Number(priority) < 7
+                  : Number(complexity) < 7
                   ? "Medium"
                   : "High"}
                 {` (${complexity}/10)`}

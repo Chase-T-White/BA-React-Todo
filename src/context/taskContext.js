@@ -33,7 +33,9 @@ const TasksProvider = ({ children }) => {
 
   const updatedTask = (editedTask) => {
     const updatedTaskList = tasksList.map((task) =>
-      task.id === editedTask.id ? editedTask : task
+      task.id === editedTask.id
+        ? { ...editedTask, isCompleted: task.isCompleted }
+        : task
     );
     setTasksList(updatedTaskList);
   };

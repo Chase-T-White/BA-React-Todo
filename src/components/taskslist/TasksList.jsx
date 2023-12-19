@@ -2,13 +2,29 @@ import styled from "styled-components";
 import Task from "./Task";
 import { useTasksContext } from "../../context/taskContext";
 
-const TasksList = () => {
+const TasksList = ({ searchInput, sortBy, filterTags }) => {
   const { tasksList } = useTasksContext();
   return (
     <Wrapper>
       <ul>
         {tasksList
           .filter((item) => item.isCompleted === false)
+          .filter((item) => {
+            if (searchInput) {
+              return item.task
+                .toLowerCase()
+                .startsWith(searchInput.toLowerCase());
+            }
+            return item;
+          })
+          .filter((item) => {
+            if (filterTags) {
+              for (const tag of filterTags) {
+                return item.tags.includes(tag);
+              }
+            }
+            return item;
+          })
           .map((item) => {
             return <Task key={item.id} {...item} />;
           })}
@@ -17,6 +33,22 @@ const TasksList = () => {
       <ul>
         {tasksList
           .filter((item) => item.isCompleted === true)
+          .filter((item) => {
+            if (searchInput) {
+              return item.task
+                .toLowerCase()
+                .startsWith(searchInput.toLowerCase());
+            }
+            return item;
+          })
+          .filter((item) => {
+            if (filterTags) {
+              for (const tag of filterTags) {
+                return item.tags.includes(tag);
+              }
+            }
+            return item;
+          })
           .map((item) => {
             return <Task key={item.id} {...item} />;
           })}

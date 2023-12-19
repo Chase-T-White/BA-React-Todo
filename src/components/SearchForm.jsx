@@ -1,27 +1,33 @@
-import React from "react";
 import styled from "styled-components";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useTasksContext } from "../context/taskContext";
 
-const SearchForm = () => {
+const SearchForm = ({ setSearchInput, setSortBy, setFilterTags }) => {
   const { tasksList } = useTasksContext();
 
   const findUniqueTags = () => {
-    const tagsArray = tasksList.flatMap((task) => task.labels);
+    const tagsArray = tasksList.flatMap((task) => task.tags);
     const uniqueTags = new Set(tagsArray);
+    console.log(uniqueTags);
     return [...uniqueTags];
   };
 
   return (
     <Form>
       <div className="search bordered">
-        <input type="text" name="search" id="search" placeholder="Search..." />
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search..."
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
         <div>
           <IoIosArrowRoundForward className="icon" />
         </div>
       </div>
       <div className="dropdowns">
-        <select className="bordered" name="sort" id="sort">
+        <select className="bordered dropdown" name="sort" id="sort">
           <option value="">Sort</option>
           <option value="">Default</option>
           <option value="">Ascending Due Date</option>
@@ -31,17 +37,19 @@ const SearchForm = () => {
           <option value="">Ascending Complexity</option>
           <option value="">Descending Complexity</option>
         </select>
-        <select className="bordered" name="tagFilter" id="labelFilter">
-          <option value="">Tags</option>
-          {findUniqueTags().map((tag) => {
-            return (
-              <div className="tagSelect-container">
-                <label htmlFor="tag">{tag}</label>
-                <input type="checkbox" name="tag" id="tag" />
-              </div>
-            );
-          })}
-        </select>
+        <div className="bordered dropdown" name="tagFilter" id="labelFilter">
+          <p>Tags</p>
+          <div className="dropdown-list">
+            {findUniqueTags().map((tag) => {
+              return (
+                <div className="tagSelect-container">
+                  <label htmlFor="tag">{tag.tag}</label>
+                  <input type="checkbox" name="tag" id="tag" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </Form>
   );
@@ -75,6 +83,19 @@ const Form = styled.form`
     display: flex;
     gap: 1.5rem;
     margin-bottom: 2rem;
+
+    .dropdown {
+      position: relative;
+
+      .dropdown-list {
+        position: absolute;
+        width: 100%;
+        max-height: 100px;
+        overflow-y: scroll;
+        scollbar-width: none;
+        z-index: 100;
+      }
+    }
   }
 
   select {

@@ -56,7 +56,7 @@ const Wrapper = styled.div`
     margin-bottom: 2rem;
 
     display: flex;
-    gap: 1.5rem;
+    gap: 0.5rem;
 
     button {
       flex-basis: 50%;

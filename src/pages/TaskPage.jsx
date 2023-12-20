@@ -43,40 +43,44 @@ const TaskPage = () => {
               priority={priority}
               complexity={complexity}
             />
-            <div className="completed-container">
-              <div className="completed">
-                <p>Task Completed</p>
-                <p>{subTasksCompleted}%</p>
+            {subTasks.length > 0 && (
+              <div className="completed-container">
+                <div className="completed">
+                  <p>Task Completed</p>
+                  <p>{subTasksCompleted}%</p>
+                </div>
+                <div
+                  style={{
+                    backgroundImage: `linear-gradient(to right, var(--text-yellow) 0 ${subTasksCompleted}%, var(--background-tint) ${subTasksCompleted}% 100%)`,
+                  }}
+                  className="completed-meter"
+                ></div>
               </div>
-              <div
-                style={{
-                  backgroundImage: `linear-gradient(to right, var(--text-yellow) 0 ${subTasksCompleted}%, var(--background-tint) ${subTasksCompleted}% 100%)`,
-                }}
-                className="completed-meter"
-              ></div>
-            </div>
+            )}
           </div>
-          <div>
-            <h4>Subtasks</h4>
-            <ol>
-              {subTasks.map((subTask, i) => {
-                return (
-                  <li key={subTask.id}>
-                    <p>{`${i + 1}. ${subTask.task}`}</p>
-                    <div className="subTask-complete-container">
-                      {subTask.isCompleted && <p>Completed</p>}
-                      <div
-                        className="check-btn"
-                        onClick={() => toggleCompleted(id, subTask)}
-                      >
-                        <IoMdCheckmark />
+          {subTasks.length > 0 && (
+            <div>
+              <h4>Subtasks</h4>
+              <ol>
+                {subTasks.map((subTask, i) => {
+                  return (
+                    <li key={subTask.id}>
+                      <p>{`${i + 1}. ${subTask.task}`}</p>
+                      <div className="subTask-complete-container">
+                        {subTask.isCompleted && <p>Completed</p>}
+                        <div
+                          className="check-btn"
+                          onClick={() => toggleCompleted(id, subTask)}
+                        >
+                          <IoMdCheckmark />
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          )}
         </div>
         <div className="button-container">
           <button

@@ -22,6 +22,8 @@ export function displayDueDate(dueBy) {
   let displayTime;
   if (dueTimeArr[0] === "00") {
     displayTime = `12:${dueTimeArr[1]} AM`;
+  } else if (Number(dueTimeArr[0]) === 12) {
+    displayTime = `${dueTimeArr[0]}:${dueTimeArr[1]} PM`;
   } else if (Number(dueTimeArr[0]) > 12) {
     displayTime = `${Number(dueTimeArr[0]) - 12}:${dueTimeArr[1]} PM`;
   } else {

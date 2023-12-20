@@ -2,11 +2,21 @@ import { CiEdit, CiTrash } from "react-icons/ci";
 import { IoMdCheckmark } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import CircleProgressBar from "./CircleProgressBar";
 import MainTaskDetails from "./MainTaskDetails";
 import { useTasksContext } from "../../context/taskContext";
 import { uid } from "uid";
 
-const Task = ({ id, task, complexity, priority, dueBy, createdAt, tags }) => {
+const Task = ({
+  id,
+  task,
+  complexity,
+  priority,
+  dueBy,
+  createdAt,
+  subTasks,
+  tags,
+}) => {
   const navigate = useNavigate();
   const { toggleCompleted, deleteSingleTask } = useTasksContext();
 
@@ -19,9 +29,10 @@ const Task = ({ id, task, complexity, priority, dueBy, createdAt, tags }) => {
         priority={priority}
         complexity={complexity}
       />
+      {subTasks.length > 0 && <CircleProgressBar subTasks={subTasks} />}
       <div className="task-additions">
         {tags.length > 0 && (
-          <ul>
+          <ul className="tags-list">
             {tags.map((tag) => {
               return <li key={uid()}>{tag}</li>;
             })}
@@ -29,13 +40,25 @@ const Task = ({ id, task, complexity, priority, dueBy, createdAt, tags }) => {
         )}
         <div className="container tl-wrapper">
           <div className="container task-links">
-            <div onClick={() => toggleCompleted(id)}>
+            <div
+              className="task-icon"
+              onClick={() => toggleCompleted(id)}
+              title="Mark Complete"
+            >
               <IoMdCheckmark />
             </div>
-            <div onClick={() => navigate(`editTask/${id}`)}>
+            <div
+              className="task-icon"
+              onClick={() => navigate(`editTask/${id}`)}
+              title="Edit"
+            >
               <CiEdit />
             </div>
-            <div onClick={() => deleteSingleTask(id)}>
+            <div
+              className="task-icon"
+              onClick={() => deleteSingleTask(id)}
+              title="Delete"
+            >
               <CiTrash />
             </div>
           </div>
@@ -49,6 +72,7 @@ const Task = ({ id, task, complexity, priority, dueBy, createdAt, tags }) => {
 export default Task;
 
 const ListItem = styled.li`
+  position: relative;
   max-width: 350px;
   flex-grow: 1;
   display: flex;
@@ -66,10 +90,10 @@ const ListItem = styled.li`
     flex-direction: column;
     justify-content: end;
   }
-  ul {
+  .tags-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.25rem;
     margin-bottom: 0.75rem;
   }
   li {
@@ -84,5 +108,9 @@ const ListItem = styled.li`
   }
   .tl-wrapper {
     justify-content: space-between;
+  }
+  .task-icon {
+    cursor: pointer;
+    font-size: 1.25rem;
   }
 `;

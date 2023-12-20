@@ -2,10 +2,10 @@ const healthBarTimer = (createdAt, dueBy) => {
   const currentDate = new Date().getTime();
 
   // calculate total amount of time to complete task
-  const totalTime = new Date(dueBy).getTime() - new Date(createdAt).getTime();
+  const totalTime = Date.parse(dueBy) - Date.parse(createdAt);
 
   // calculate time remaining to complete task
-  const remainingTime = new Date(dueBy).getTime() - currentDate;
+  const remainingTime = Date.parse(dueBy) - currentDate;
 
   // health bar based on percentage of total time remaining
   let healthBarRemaining = ((remainingTime / totalTime) * 100).toFixed(0);

@@ -24,7 +24,7 @@ const MainTaskDetails = ({ task, dueBy, createdAt, priority, complexity }) => {
         {headsUpMessage && <small>{headsUpMessage}</small>}
       </header>
       <div className="details-container">
-        {dueBy && (
+        {dueBy.dueDate && (
           <div className="container">
             <CiCalendarDate />
             <p>

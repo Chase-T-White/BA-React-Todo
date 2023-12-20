@@ -4,18 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainTaskDetails from "./MainTaskDetails";
 import { useTasksContext } from "../../context/taskContext";
+import { uid } from "uid";
 
-const Task = ({
-  id,
-  task,
-  complexity,
-  priority,
-  dueBy,
-  createdAt,
-  subTasks,
-  tags,
-  isCompleted,
-}) => {
+const Task = ({ id, task, complexity, priority, dueBy, createdAt, tags }) => {
   const navigate = useNavigate();
   const { toggleCompleted, deleteSingleTask } = useTasksContext();
 
@@ -32,7 +23,7 @@ const Task = ({
         {tags.length > 0 && (
           <ul>
             {tags.map((tag) => {
-              return <li key={tag.id}>{tag.tag}</li>;
+              return <li key={uid()}>{tag}</li>;
             })}
           </ul>
         )}

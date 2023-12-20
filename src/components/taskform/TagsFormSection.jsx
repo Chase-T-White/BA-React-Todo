@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { IoIosAdd } from "react-icons/io";
-import { uid } from "uid";
 import styled from "styled-components";
 import Tag from "./Tag";
 
@@ -20,10 +19,10 @@ const TagsFormSection = ({ tags, setTags }) => {
   const addToTagsList = () => {
     if (input) {
       const duplicate = tags.filter(
-        (tag) => tag.tag.toLowerCase() === input.toLowerCase()
+        (tag) => tag.toLowerCase() === input.toLowerCase()
       );
       if (duplicate.length === 0) {
-        setTags([...tags, { id: uid(), tag: input }]);
+        setTags([...tags, input]);
         setInput("");
       } else {
         setIsDuplicate(true);
@@ -31,8 +30,8 @@ const TagsFormSection = ({ tags, setTags }) => {
     }
   };
 
-  const removeTag = (id) => {
-    const updatedTags = tags.filter((tag) => tag.id !== id);
+  const removeTag = (value) => {
+    const updatedTags = tags.filter((tag) => tag !== value);
     setTags(updatedTags);
   };
 
@@ -66,7 +65,7 @@ const TagsFormSection = ({ tags, setTags }) => {
       {tags.length > 0 && (
         <List>
           {tags.map((tag) => {
-            return <Tag key={tag.id} {...tag} removeTag={removeTag} />;
+            return <Tag key={tag} tag={tag} removeTag={removeTag} />;
           })}
         </List>
       )}

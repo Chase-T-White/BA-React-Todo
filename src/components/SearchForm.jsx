@@ -4,14 +4,29 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { GoChevronDown } from "react-icons/go";
 import { useTasksContext } from "../context/taskContext";
 
-const SearchForm = ({ setSearchInput, setSortBy, setFilterTags }) => {
-  const [isShowList, setIsShowList] = useState(false);
+const SearchForm = ({
+  setSearchInput,
+  setSortBy,
+  filterTags,
+  setFilterTags,
+}) => {
+  const [isShowSort, setIsShowSort] = useState(false);
+  const [isShowTags, setIsShowTags] = useState(false);
   const { tasksList } = useTasksContext();
 
   const findUniqueTags = () => {
     const tagsArray = tasksList.flatMap((task) => task.tags);
     const uniqueTags = new Set(tagsArray);
     return [...uniqueTags];
+  };
+
+  const handleClick = (e) => {
+    if (filterTags.includes(e.target.value)) {
+      const removedTagList = filterTags.filter((tag) => tag !== e.target.value);
+      setFilterTags(removedTagList);
+    } else {
+      setFilterTags([...filterTags, e.target.value]);
+    }
   };
 
   return (
@@ -30,31 +45,40 @@ const SearchForm = ({ setSearchInput, setSortBy, setFilterTags }) => {
       </div>
       <div className="dropdowns">
         <div className="bordered dropdown" name="sort" id="sort">
-          <div onClick={() => setIsShowList(!isShowList)}>
+          <div onClick={() => setIsShowSort(!isShowSort)}>
             <p>Sort</p>
             <GoChevronDown />
           </div>
-          <ul className={`dropdown-list ${isShowList ? "none" : ""}`}>
-            <li value="">Default</li>
-            <li value="dueClose">Due Date (Closest)</li>
-            <li value="dueFar">Due Date (Farthest)</li>
-            <li value="priorityHigh">Priority (10-1)</li>
-            <li value="priorityLow">Priority (1-10)</li>
-            <li value="complexityHigh">Complexity (10-1)</li>
-            <li value="complexityLow">Complexity (1-10)</li>
+          <ul
+            className={`dropdown-list ${isShowSort ? "" : "none"}`}
+            onClick={(e) => setSortBy(e.target.value)}
+          >
+            <li value={0}>Default</li>
+            <li value={1}>Due Date (Closest)</li>
+            <li value={2}>Due Date (Farthest)</li>
+            <li value={3}>Priority (10-1)</li>
+            <li value={4}>Priority (1-10)</li>
+            <li value={5}>Complexity (10-1)</li>
+            <li value={6}>Complexity (1-10)</li>
           </ul>
         </div>
         <div className="bordered dropdown" name="tagFilter" id="labelFilter">
-          <div onClick={() => setIsShowList(!isShowList)}>
+          <div onClick={() => setIsShowTags(!isShowTags)}>
             <p>Tags</p>
             <GoChevronDown />
           </div>
-          <ul className={`dropdown-list ${isShowList ? "none" : ""}`}>
+          <ul className={`dropdown-list ${isShowTags ? "" : "none"}`}>
             {findUniqueTags().map((tag) => {
               return (
-                <li className="tagSelect-container">
-                  <label htmlFor="tag">{tag.tag}</label>
-                  <input type="checkbox" name="tag" id="tag" />
+                <li key={tag} className="tagSelect-container">
+                  <label htmlFor="tag">{tag}</label>
+                  <input
+                    type="checkbox"
+                    name="tag"
+                    id="tag"
+                    value={tag}
+                    onClick={handleClick}
+                  />
                 </li>
               );
             })}

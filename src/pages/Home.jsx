@@ -8,8 +8,8 @@ import { useTasksContext } from "../context/taskContext";
 const Home = () => {
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
-  const [filterTags, setFilterTags] = useState(null);
+  const [sortBy, setSortBy] = useState("");
+  const [filterTags, setFilterTags] = useState([]);
   const { tasksList, deleteTasks } = useTasksContext();
   return (
     <article>
@@ -18,6 +18,7 @@ const Home = () => {
         <SearchForm
           setSearchInput={setSearchInput}
           setSortBy={setSortBy}
+          filterTags={filterTags}
           setFilterTags={setFilterTags}
         />
         <div className="button-container">

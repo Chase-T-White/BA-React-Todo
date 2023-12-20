@@ -1,11 +1,11 @@
 import { IoMdClose } from "react-icons/io";
 import styled from "styled-components";
 
-const Tag = ({ id, tag, removeTag }) => {
+const Tag = ({ tag, removeTag }) => {
   return (
     <ListItem className="bordered bordered__noPoint">
       <h6>{tag}</h6>
-      <div onClick={() => removeTag(id)} title="Remove">
+      <div onClick={() => removeTag(tag)} title="Remove">
         <IoMdClose />
       </div>
     </ListItem>
